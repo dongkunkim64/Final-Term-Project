@@ -1,0 +1,14 @@
+{
+    "Logistic Regression": {
+        "plain_accuracy": 100.0,
+        "fhe_accuracy": 100.0,
+        "plain_latency_ms": 0.011701583862304688,
+        "fhe_latency_ms": 35.32536029815674
+    },
+    "Decision Tree": {
+        "plain_accuracy": 100.0,
+        "fhe_accuracy": 100.0,
+        "plain_latency_ms": 0.012054443359375,
+        "fhe_latency_ms": 45.99350452423096
+    }
+}

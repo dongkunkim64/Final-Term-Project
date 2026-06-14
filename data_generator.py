@@ -30,7 +30,10 @@ def generate_ugv_data(num_samples=5000, attack_ratio=0.1):
     attack_indices = np.random.choice(num_samples, num_attacks, replace=False)
     
     for idx in attack_indices:
-        attack_type = np.random.choice(['steering_takeover', 'gps_spoofing', 'speed_jamming'])
+        attack_type = np.random.choice([
+            'steering_takeover', 'gps_spoofing', 'speed_jamming', 
+            'replay_attack', 'false_data_injection', 'dos_attack'
+        ])
         
         if attack_type == 'steering_takeover':
             # Hacker maximizes steering to crash the UGV
@@ -42,6 +45,29 @@ def generate_ugv_data(num_samples=5000, attack_ratio=0.1):
         elif attack_type == 'speed_jamming':
             # Sudden unrealistic speed jump
             speed[idx] += np.random.uniform(50, 100)
+        elif attack_type == 'replay_attack':
+            # Replay data from 10 steps ago (simulates telemetry freeze or stale playback)
+            lookback = 10
+            if idx >= lookback:
+                steering[idx] = steering[idx - lookback]
+                speed[idx] = speed[idx - lookback]
+                gps_lat[idx] = gps_lat[idx - lookback]
+                gps_long[idx] = gps_long[idx - lookback]
+            else:
+                steering[idx] = 0.0
+                speed[idx] = 30.0
+        elif attack_type == 'false_data_injection':
+            # Inject moderate but persistent bias to sensors
+            steering[idx] += np.random.normal(loc=0.3, scale=0.1)
+            speed[idx] += np.random.normal(loc=25.0, scale=5.0)
+            gps_lat[idx] += np.random.uniform(0.1, 0.5)
+            gps_long[idx] += np.random.uniform(0.1, 0.5)
+        elif attack_type == 'dos_attack':
+            # Denial of Service - signals drop to 0 or extremely low values
+            steering[idx] = 0.0
+            speed[idx] = 0.0
+            gps_lat[idx] = 0.0
+            gps_long[idx] = 0.0
             
         labels[idx] = 1 # Mark as attack
         
