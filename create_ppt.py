@@ -133,6 +133,10 @@ def create_presentation():
     p.text = "RPM/Gear Spoofing 공격: 차량 속도 및 기어 강제 조작 (본 연구의 핵심 시나리오)"
     p.level = 1
 
+    if os.path.exists('hcrl_dataset_architecture.png'):
+        slide.shapes.add_picture('hcrl_dataset_architecture.png', Inches(4.5), Inches(2.0), width=Inches(5))
+
+
     # 8. 실험 및 검증 결과
     slide = prs.slides.add_slide(bullet_slide_layout)
     slide.shapes.title.text = "6. 최종 모델 검증 결과"
