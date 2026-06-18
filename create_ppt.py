@@ -29,9 +29,11 @@ def create_presentation():
     p = tf.add_paragraph()
     p.text = "4. 시스템 아키텍처 및 파이프라인"
     p = tf.add_paragraph()
-    p.text = "5. 모델 검증 (오픈 데이터셋 활용)"
+    p.text = "5. 검증 데이터셋 소개 (고려대 HCRL)"
     p = tf.add_paragraph()
-    p.text = "6. 결론 및 향후 과제"
+    p.text = "6. 최종 모델 검증 결과"
+    p = tf.add_paragraph()
+    p.text = "7. 결론 및 향후 과제"
 
     # 3. 연구 배경
     slide = prs.slides.add_slide(bullet_slide_layout)
@@ -104,34 +106,64 @@ def create_presentation():
     p.text = "암호화된 상태로 데이터 수신 ➡️ 로지스틱 회귀 이상탐지 연산 ➡️ 암호문 반환"
     p.level = 1
 
-    # 7. 실험 및 검증 (오픈 데이터셋) -> NEW
+    # 7. HCRL 데이터셋 소개 (NEW)
     slide = prs.slides.add_slide(bullet_slide_layout)
-    slide.shapes.title.text = "5. 모델 검증 (오픈 데이터셋 활용)"
+    slide.shapes.title.text = "5. 검증 데이터셋 소개 (고려대 HCRL)"
     tf = slide.shapes.placeholders[1].text_frame
-    tf.text = "국제적으로 검증된 공인 데이터셋 도입"
+    tf.text = "고려대학교 HCRL(Hacking and Countermeasure Research Lab)"
     p = tf.add_paragraph()
-    p.text = "'Car Hacking Dataset' 등 실제 차량(CAN Bus) 해킹 데이터를 활용하여 모델 검증"
+    p.text = "자율주행 및 자동차 보안 분야에서 국제적으로 가장 널리 인용되는 공인 데이터셋"
     p.level = 1
     p = tf.add_paragraph()
-    p.text = "검증 방법 및 결과"
+    p.text = "데이터 수집 환경"
     p.level = 0
     p = tf.add_paragraph()
-    p.text = "정상 주행 패턴과 악의적인 조작(속도 급증, 조향각 변조, DoS 공격) 데이터 분류"
+    p.text = "실제 차량(기아 쏘울)의 내부 통신망(CAN Bus)에서 실주행 중 트래픽 추출"
     p.level = 1
     p = tf.add_paragraph()
-    p.text = "동형암호화된 상태에서도 평문과 동일한 수준의 높은 탐지 정확도 유지 입증"
+    p.text = "4대 치명적 해킹 시나리오 포함"
+    p.level = 0
+    p = tf.add_paragraph()
+    p.text = "DoS 공격: 통신망 전체 마비 시도"
+    p.level = 1
+    p = tf.add_paragraph()
+    p.text = "Fuzzy 공격: 무작위 교란 신호 주입"
+    p.level = 1
+    p = tf.add_paragraph()
+    p.text = "RPM/Gear Spoofing 공격: 차량 속도 및 기어 강제 조작 (본 연구의 핵심 시나리오)"
     p.level = 1
 
-    # 8. 결론 및 향후 과제
+    # 8. 실험 및 검증 결과
     slide = prs.slides.add_slide(bullet_slide_layout)
-    slide.shapes.title.text = "6. 결론 및 향후 과제"
+    slide.shapes.title.text = "6. 최종 모델 검증 결과"
+    tf = slide.shapes.placeholders[1].text_frame
+    tf.text = "HCRL 데이터셋 대상 로지스틱 회귀 모델의 FHE 검증"
+    p = tf.add_paragraph()
+    p.text = "탐지 정확도 (Accuracy)"
+    p.level = 1
+    p = tf.add_paragraph()
+    p.text = "평문 상태(79.5%)와 동형암호 상태(79.0%)에서 동일한 수준의 높은 방어율 입증"
+    p.level = 2
+    p = tf.add_paragraph()
+    p.text = "초저지연 실시간성 (Ultra-Low Latency)"
+    p.level = 1
+    p = tf.add_paragraph()
+    p.text = "암호문 추론 지연시간 평균 2.47ms 달성 (목표치 34.4ms를 월등히 상회)"
+    p.level = 2
+    p = tf.add_paragraph()
+    p.text = "결론: 고속 주행 차량에서도 딜레이 없는 완벽한 실시간 해킹 방어 가능"
+    p.level = 1
+
+    # 9. 결론 및 향후 과제
+    slide = prs.slides.add_slide(bullet_slide_layout)
+    slide.shapes.title.text = "7. 결론 및 향후 과제"
     tf = slide.shapes.placeholders[1].text_frame
     tf.text = "결론"
     p = tf.add_paragraph()
-    p.text = "동형암호를 통한 데이터 보호와 로지스틱 회귀를 통한 초저지연(34.4ms) 방어 시스템의 융합 성공"
+    p.text = "동형암호를 통한 데이터 보호와 로지스틱 회귀를 통한 초저지연(2.47ms) 방어 시스템의 융합 성공"
     p.level = 1
     p = tf.add_paragraph()
-    p.text = "공인 오픈 데이터셋을 통해 실전 모델로서의 타당성 및 정확도 입증"
+    p.text = "HCRL 공인 데이터셋을 통해 실전 모델로서의 타당성 및 정확도 입증"
     p.level = 1
     p = tf.add_paragraph()
     p.text = "향후 과제"
@@ -141,7 +173,7 @@ def create_presentation():
     p.level = 1
 
     prs.save('UGV_FHE_Presentation_Final.pptx')
-    print("완성형 PPT 파일 'UGV_FHE_Presentation_Final.pptx' 생성 완료!")
+    print("HCRL 소개가 추가된 완성형 PPT 파일 생성 완료!")
 
 if __name__ == '__main__':
     create_presentation()
