@@ -95,6 +95,9 @@ def create_presentation():
     p.text = "CARLA 3D 물리 엔진 구동 및 대규모 데이터(10만 건) 추출"
     p = tf.add_paragraph()
     p.text = "실제 전장과 유사한 의도적 사이버 공격 패킷 주입"
+    
+    if os.path.exists('glowsai_100k_data_distribution.png'):
+        slide.shapes.add_picture('glowsai_100k_data_distribution.png', Inches(4.5), Inches(2.0), width=Inches(5))
 
     # 7. 파이프라인
     slide = prs.slides.add_slide(bullet_slide_layout)
