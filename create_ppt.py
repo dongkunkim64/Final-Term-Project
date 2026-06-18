@@ -106,8 +106,8 @@ def create_presentation():
     p.text = "AI가 이 물리적 패턴 차이를 학습하여 즉각적인 방어 수행"
     p.level = 1
     
-    if os.path.exists('glowsai_100k_data_distribution.png'):
-        slide.shapes.add_picture('glowsai_100k_data_distribution.png', Inches(4.5), Inches(2.0), width=Inches(5))
+    if os.path.exists('glowsai_time_series_flow.png'):
+        slide.shapes.add_picture('glowsai_time_series_flow.png', Inches(4.5), Inches(2.0), width=Inches(5))
 
     # 7. 파이프라인
     slide = prs.slides.add_slide(bullet_slide_layout)
