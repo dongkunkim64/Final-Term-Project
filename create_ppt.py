@@ -94,7 +94,17 @@ def create_presentation():
     p = tf.add_paragraph()
     p.text = "CARLA 3D 물리 엔진 구동 및 대규모 데이터(10만 건) 추출"
     p = tf.add_paragraph()
-    p.text = "실제 전장과 유사한 의도적 사이버 공격 패킷 주입"
+    p.text = "데이터 분포 물리적 분석 (파란색: 정상 vs 빨간색: 해킹)"
+    p.level = 1
+    p = tf.add_paragraph()
+    p.text = "[정상] 속도 50km/h 및 조향각 0(직진) 유지 안전 주행"
+    p.level = 2
+    p = tf.add_paragraph()
+    p.text = "[해킹] 속도 85km/h 이상 과속 및 핸들 급조작(조향각 0.8)"
+    p.level = 2
+    p = tf.add_paragraph()
+    p.text = "AI가 이 물리적 패턴 차이를 학습하여 즉각적인 방어 수행"
+    p.level = 1
     
     if os.path.exists('glowsai_100k_data_distribution.png'):
         slide.shapes.add_picture('glowsai_100k_data_distribution.png', Inches(4.5), Inches(2.0), width=Inches(5))
